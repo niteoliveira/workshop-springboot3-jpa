@@ -2,16 +2,17 @@ package com.leoweb.course.config;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.leoweb.course.entities.Category;
 import com.leoweb.course.entities.Order;
 import com.leoweb.course.entities.User;
 import com.leoweb.course.entities.enums.OrderStatus;
+import com.leoweb.course.repositories.CategoryRepository;
 import com.leoweb.course.repositories.OrderRepository;
 import com.leoweb.course.repositories.UserRepository;
 
@@ -25,9 +26,18 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
-
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
  		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
  
